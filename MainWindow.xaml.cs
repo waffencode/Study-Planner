@@ -31,7 +31,7 @@ namespace Study_Planner
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
             MainTasksCollection.Debug_CreateTask(DescriptionField.Text);
-            TasksList.ItemsSource = MainTasksCollection.tasksArray.ToList();
+            TasksList.ItemsSource = MainTasksCollection.tasksList.ToList();
             
         }
 
