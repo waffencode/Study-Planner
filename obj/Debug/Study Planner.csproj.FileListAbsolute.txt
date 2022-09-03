@@ -1,0 +1,32 @@
+C:\Users\Hertz\Documents\Dotnet\Study Planner\bin\Debug\Study Planner.exe.config
+C:\Users\Hertz\Documents\Dotnet\Study Planner\bin\Debug\Study Planner.exe
+C:\Users\Hertz\Documents\Dotnet\Study Planner\bin\Debug\Study Planner.pdb
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.csproj.AssemblyReference.cache
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.csproj.SuggestedBindingRedirects.cache
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\MainWindow.g.cs
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\App.g.cs
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner_MarkupCompile.cache
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner_MarkupCompile.lref
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\MainWindow.baml
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.g.resources
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study_Planner.Properties.Resources.resources
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.csproj.GenerateResource.cache
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.csproj.CoreCompileInputs.cache
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.exe
+C:\Users\Hertz\Documents\Dotnet\Study Planner\obj\Debug\Study Planner.pdb
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\bin\Debug\Study Planner.exe.config
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\bin\Debug\Study Planner.exe
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\bin\Debug\Study Planner.pdb
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.csproj.AssemblyReference.cache
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.csproj.SuggestedBindingRedirects.cache
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\MainWindow.g.cs
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\App.g.cs
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner_MarkupCompile.cache
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner_MarkupCompile.lref
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\MainWindow.baml
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.g.resources
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study_Planner.Properties.Resources.resources
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.csproj.GenerateResource.cache
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.csproj.CoreCompileInputs.cache
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.exe
+C:\Users\waffencode\Documents\.NET Projects\Study-Planner\obj\Debug\Study Planner.pdb
