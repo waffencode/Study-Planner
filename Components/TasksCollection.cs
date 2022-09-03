@@ -16,7 +16,7 @@ namespace Study_Planner.Components
         /// <summary>
         /// Содержит все добавленные задачи.
         /// </summary>
-        private Task[] tasksArray = new Task[MAX_TASKS];
+        public Task[] tasksArray = new Task[MAX_TASKS];
 
         /// <summary>
         /// Создаёт новую задачу.

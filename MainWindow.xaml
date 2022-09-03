@@ -39,8 +39,23 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="ToggleCompleted" Content="X" Click="Button_Click"></Button>
-                <TextBlock Text="Task Description is here" Grid.Column="1"></TextBlock>
+                <ListView x:Name="TasksList" Margin="10" Grid.Column="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=shortDescription}"/>
+                                <TextBlock Text="{Binding Path=id}"/>
+                                <Button x:Name="ToggleCompleted" Content="X" Click="Button_Click" Visibility="Hidden"></Button>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=isCompleted}" Value="false">
+                                    <Setter TargetName="ToggleCompleted" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                        
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
             
         </Grid>

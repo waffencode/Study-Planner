@@ -14,15 +14,15 @@ namespace Study_Planner.Components
         /// <summary>
         /// Содержит идентификатор задачи
         /// </summary>
-        private int id;
+        public int id { get; set; }
         /// <summary>
         /// Содержит краткое описание задачи.
         /// </summary>
-        private string shortDescription;
+        public string shortDescription { get; set; }
         /// <summary>
         /// Содержит статус выполнения задачи.
         /// </summary>
-        private bool isCompleted;
+        public bool isCompleted { get; set; }
 
         /// <summary>
         /// Действие при добавлении задачи.
@@ -50,6 +50,11 @@ namespace Study_Planner.Components
         public void ToggleCompletedState()
         {
             isCompleted = !isCompleted;
+        }
+
+        public override string ToString()
+        {
+            return shortDescription.ToString();
         }
     }
 }
