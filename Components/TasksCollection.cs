@@ -40,7 +40,7 @@ namespace Study_Planner.Components
         /// <summary>
         /// Получает число задач, добавленных пользователем.
         /// </summary>
-        /// <returns>Целое число — количество значений типа <seealso cref="Task" /> в списке <paramref name="tasksArray" />.</returns>
+        /// <returns>Целое число — количество значений типа <seealso cref="Task" /> в списке <paramref name="tasksList" />.</returns>
         public int GetTasksCount()
         {
             return tasksList.Count();
