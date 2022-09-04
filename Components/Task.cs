@@ -51,10 +51,5 @@ namespace Study_Planner.Components
         {
             isCompleted = !isCompleted;
         }
-
-        public override string ToString()
-        {
-            return shortDescription.ToString();
-        }
     }
 }
