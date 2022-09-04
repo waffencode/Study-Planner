@@ -12,7 +12,7 @@ namespace Study_Planner.Components
     /// </summary>
     public class TasksCollection
     {
-        const int MAX_TASKS = 5;
+        const int MAX_TASKS = 10;
         /// <summary>
         /// Содержит все добавленные задачи.
         /// </summary>
@@ -21,7 +21,8 @@ namespace Study_Planner.Components
         /// <summary>
         /// Создаёт новую задачу.
         /// </summary>
-        public void Debug_CreateTask(string shortDescription)
+        /// <param name="shortDescription">Краткое описание создаваемой задачи.</param>
+        public void CreateTask(string shortDescription)
         {
             int newTaskID = GetTasksCount();
 

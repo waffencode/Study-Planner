@@ -21,16 +21,16 @@ namespace Study_Planner
     public partial class MainWindow : Window
     {
         public Components.TasksCollection MainTasksCollection;
+
         public MainWindow()
         {
             InitializeComponent();
-
             MainTasksCollection = new Components.TasksCollection();
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            MainTasksCollection.Debug_CreateTask(DescriptionField.Text);
+            MainTasksCollection.CreateTask(DescriptionField.Text);
             TasksList.ItemsSource = MainTasksCollection.tasksList.ToList();
         }
 
