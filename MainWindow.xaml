@@ -10,9 +10,9 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
@@ -26,38 +26,27 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <TextBox x:Name="DescriptionField" />
+                <Button Content="Add Task" Click="AddTask_Click" />
+            </StackPanel>
 
-            <TextBox x:Name="DescriptionField" Grid.Row="1" Grid.Column="1" />
-            <Button Content="Add Task" Grid.Row="2" Grid.Column="1" Click="AddTask_Click"></Button>
-
-            <Grid Grid.Row="1" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <ListView x:Name="TasksList" Margin="10" Grid.Column="1">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Path=shortDescription}"/>
-                                <TextBlock Text="{Binding Path=id}"/>
-                                <Button x:Name="ToggleCompleted" Content="X" Click="Button_Click" Visibility="Hidden"></Button>
-                            </StackPanel>
-                            <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Path=isCompleted}" Value="false">
-                                    <Setter TargetName="ToggleCompleted" Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                            </DataTemplate.Triggers>
-                        </DataTemplate>
-                        
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
-            
+            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=shortDescription}"/>
+                            <TextBlock Text="{Binding Path=id}"/>
+                            <Button x:Name="ToggleCompleted" Content="X" Click="Button_Click" Visibility="Hidden"></Button>
+                        </StackPanel>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=isCompleted}" Value="false">
+                                <Setter TargetName="ToggleCompleted" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Border>
 </Window>
