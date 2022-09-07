@@ -11,18 +11,51 @@ namespace Study_Planner.Components
     /// </summary>
     public class Task
     {
+        private int _id;
+        private string _shortDescription;
+        private bool _isCompleted;
+
         /// <summary>
-        /// Содержит идентификатор задачи
+        /// Содержит идентификатор задачи.
         /// </summary>
-        public int id { get; set; }
+        public int Id 
+        { 
+            get
+            {
+                return _id;
+            } 
+            set
+            {
+                _id = value;
+            } 
+        }
         /// <summary>
         /// Содержит краткое описание задачи.
         /// </summary>
-        public string shortDescription { get; set; }
+        public string ShortDescription 
+        { 
+            get 
+            {
+                return _shortDescription;
+            } 
+            set 
+            {
+                _shortDescription = value;
+            } 
+        }
         /// <summary>
         /// Содержит статус выполнения задачи.
         /// </summary>
-        public bool isCompleted { get; set; }
+        public bool IsCompleted 
+        {
+            get 
+            {
+                return _isCompleted;
+            }
+            set { 
+                _isCompleted = value; 
+            } 
+        }
 
         /// <summary>
         /// Действие при добавлении задачи.
@@ -31,9 +64,9 @@ namespace Study_Planner.Components
         /// <param name="givenDescription">Краткое описание задачи.</param>
         public Task(int givenID, string givenDescription)
         {
-            id = givenID;
-            shortDescription = givenDescription;
-            isCompleted = false;
+            Id = givenID;
+            ShortDescription = givenDescription;
+            IsCompleted = false;
         }
 
         /// <summary>
@@ -49,7 +82,7 @@ namespace Study_Planner.Components
         /// </summary>
         public void ToggleCompletedState()
         {
-            isCompleted = !isCompleted;
+            IsCompleted = !IsCompleted;
         }
     }
 }

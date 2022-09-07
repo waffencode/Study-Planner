@@ -35,10 +35,10 @@
                     <DataTemplate> 
                         <WrapPanel Background="LightGray">
                             <Button x:Name="ToggleCompleted" DataContext="{Binding Task}" Content="X" Click="Button_Click" Visibility="Hidden" Margin="5"></Button>
-                            <TextBlock Text="{Binding Path=shortDescription}" Margin="5"/>
+                            <TextBlock Text="{Binding Path=ShortDescription}" Margin="5"/>
                         </WrapPanel>
                         <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Path=isCompleted}" Value="false">
+                            <DataTrigger Binding="{Binding Path=IsCompleted}" Value="false">
                                 <Setter TargetName="ToggleCompleted" Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </DataTemplate.Triggers>
