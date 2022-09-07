@@ -12,7 +12,7 @@
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="500" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
@@ -30,16 +30,18 @@
                 <TextBox x:Name="DescriptionField" />
                 <Button Content="Add Task" Click="AddTask_Click" />
             </StackPanel>
-            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3">
+            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}">
                 <ListView.ItemTemplate>
-                    <DataTemplate> 
+                    <DataTemplate>
                         <WrapPanel Background="LightGray">
-                            <Button x:Name="ToggleCompleted" DataContext="{Binding Task}" Content="X" Click="Button_Click" Visibility="Hidden" Margin="5"></Button>
-                            <TextBlock Text="{Binding Path=ShortDescription}" Margin="5"/>
+                            <Button x:Name="ToggleCompletedButton" Content="Done!" Click="ToggleCompleted_Click" Margin="5"/>
+                            <Button x:Name="DeleteTaskButton" Content="Delete!" Click="DeleteTask_Click" Margin="5"/>
+                            <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="5"/>
                         </WrapPanel>
                         <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Path=IsCompleted}" Value="false">
-                                <Setter TargetName="ToggleCompleted" Property="Visibility" Value="Visible"/>
+                            <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
+                                <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
+                                <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

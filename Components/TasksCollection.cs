@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Study_Planner.Components
         /// Создаёт новую задачу.
         /// </summary>
         /// <param name="shortDescription">Краткое описание создаваемой задачи.</param>
-        public void CreateTask(string shortDescription)
+        public Task CreateTask(string shortDescription)
         {
             int newTaskID = GetTasksCount();
 
@@ -36,6 +37,8 @@ namespace Study_Planner.Components
             {
                 throw new ArgumentOutOfRangeException("Too much tasks.", e);
             }
+
+            return newTask;
         }
 
         /// <summary>

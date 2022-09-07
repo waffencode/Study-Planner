@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +11,18 @@ namespace Study_Planner.Components
     /// <summary>
     /// Описывает объект задачи и логику взаимодействия с ним.
     /// </summary>
-    public class Task
+    public class Task : INotifyPropertyChanged
     {
         private int _id;
         private string _shortDescription;
         private bool _isCompleted;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         /// <summary>
         /// Содержит идентификатор задачи.
@@ -53,7 +62,8 @@ namespace Study_Planner.Components
                 return _isCompleted;
             }
             set { 
-                _isCompleted = value; 
+                _isCompleted = value;
+                NotifyPropertyChanged();
             } 
         }
 
