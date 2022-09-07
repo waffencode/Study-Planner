@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Study_Planner.Components;
@@ -10,20 +11,18 @@ namespace Study_Planner
     /// </summary>
     public partial class MainWindow : Window
     {
-        public TasksCollection MainTasksCollection;
         public ObservableCollection<Task> Tasks;
 
         public MainWindow()
         {
             InitializeComponent();
-            MainTasksCollection = new TasksCollection();
             Tasks = new ObservableCollection<Task>();
             TasksList.DataContext = Tasks;
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            Tasks.Add(MainTasksCollection.CreateTask(DescriptionField.Text));
+            Tasks.Add(new Task(Tasks.Count, DescriptionField.Text));
         }
 
         private void ToggleCompleted_Click(object sender, RoutedEventArgs e)
