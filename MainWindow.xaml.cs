@@ -11,7 +11,7 @@ namespace Study_Planner
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Task> Tasks;
+        private ObservableCollection<Task> Tasks;
 
         public MainWindow()
         {
@@ -27,17 +27,17 @@ namespace Study_Planner
 
         private void ToggleCompleted_Click(object sender, RoutedEventArgs e)
         {
-            GetButtonDataContext((Button)sender).ToggleCompletedState();
+            GetButtonTaskContext(sender).ToggleCompletedState();
         }
 
         private void DeleteTask_Click(object sender, RoutedEventArgs e)
         {
-            Tasks.Remove(GetButtonDataContext((Button)sender));
+            Tasks.Remove(GetButtonTaskContext(sender));
         }
 
-        private Task GetButtonDataContext(Button button)
+        private Task GetButtonTaskContext(object button)
         {
-            return (Task)button.DataContext;
+            return (Task)((Button)button).DataContext;
         }
     }
 }

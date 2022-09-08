@@ -64,7 +64,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\TaskViewModel.cs" />
-    <Compile Include="Components\TasksCollection.cs" />
     <Compile Include="Components\FileSystem.cs" />
     <Compile Include="Components\Task.cs" />
     <Compile Include="MainWindow.xaml.cs">
