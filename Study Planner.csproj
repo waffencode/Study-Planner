@@ -63,8 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\TaskViewModel.cs" />
-    <Compile Include="Components\FileSystem.cs" />
     <Compile Include="Components\Task.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

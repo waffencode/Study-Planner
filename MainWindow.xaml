@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Study_Planner"
         mc:Ignorable="d"
-        Title="Study Planner" Height="800" Width="1200" WindowStyle="None" AllowsTransparency="True">
+        Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False">
     <Border Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -30,14 +30,14 @@
                 <TextBox x:Name="DescriptionField" Height="20" Margin="5" />
                 <Button Content="Add Task" Height="30" Click="AddTask_Click" Margin="5" />
             </StackPanel>
-            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}" Height="760" BorderThickness="0.8">
+            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}" Height="760" BorderThickness="0.5">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
                             <WrapPanel Width="480">
                                 <Button x:Name="ToggleCompletedButton" Content="Done!" Click="ToggleCompleted_Click" Margin="5"/>
                                 <Button x:Name="DeleteTaskButton" Content="Delete!" Click="DeleteTask_Click" Margin="5"/>
-                                <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,5,50,5"/>
+                                <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
                             </WrapPanel>
                         </Border>
                         <DataTemplate.Triggers>

@@ -1,14 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using Study_Planner.Components;
 
 namespace Study_Planner
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private ObservableCollection<Task> Tasks;
