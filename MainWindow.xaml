@@ -22,6 +22,9 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+        <ItemsPanelTemplate x:Key="taskPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
     </Window.Resources>
     <Border Background="White">
         <Grid>
@@ -47,7 +50,15 @@
                 <TextBox x:Name="DescriptionField" Height="20" Margin="5" />
                 <Button Content="Add Task" Height="30" Click="AddTask_Click" Margin="5" />
             </StackPanel>
-            <ListView x:Name="TasksList" ItemTemplate="{StaticResource taskTemplate}" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}" Height="760" BorderThickness="0.5" />
+            <ListView x:Name="TasksList" 
+                      ItemTemplate="{StaticResource taskTemplate}"
+                      ItemsPanel="{StaticResource taskPanelTemplate}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Grid.Row="1" 
+                      Grid.Column="3" 
+                      ItemsSource="{Binding}" 
+                      Height="760" 
+                      BorderThickness="0.5" />
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button x:Name="MinimizeButton" Width="30" Content="_" Click="MinimizeButton_Click"/>
                 <Button x:Name="CloseButton" Width="30" Content="X" Click="CloseButton_Click"/>
