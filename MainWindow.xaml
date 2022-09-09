@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="500" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
@@ -49,6 +49,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0">
+                <Button x:Name="MinimizeButton" Width="30" Content="_" Margin="0"/>
+                <Button x:Name="CloseButton" Width="30" Content="X" Margin="0"/>
+            </WrapPanel>
         </Grid>
     </Border>
 </Window>
