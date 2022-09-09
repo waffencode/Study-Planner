@@ -6,6 +6,23 @@
         xmlns:local="clr-namespace:Study_Planner"
         mc:Ignorable="d"
         Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False">
+    <Window.Resources>
+        <DataTemplate x:Key="taskTemplate">
+            <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
+                <WrapPanel Width="480">
+                    <Button x:Name="ToggleCompletedButton" Content="Done!" Click="ToggleCompleted_Click" Margin="5"/>
+                    <Button x:Name="DeleteTaskButton" Content="Delete!" Click="DeleteTask_Click" Margin="5"/>
+                    <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
+                </WrapPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
+                    <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
+                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
     <Border Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -30,25 +47,7 @@
                 <TextBox x:Name="DescriptionField" Height="20" Margin="5" />
                 <Button Content="Add Task" Height="30" Click="AddTask_Click" Margin="5" />
             </StackPanel>
-            <ListView x:Name="TasksList" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}" Height="760" BorderThickness="0.5">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
-                            <WrapPanel Width="480">
-                                <Button x:Name="ToggleCompletedButton" Content="Done!" Click="ToggleCompleted_Click" Margin="5"/>
-                                <Button x:Name="DeleteTaskButton" Content="Delete!" Click="DeleteTask_Click" Margin="5"/>
-                                <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
-                            </WrapPanel>
-                        </Border>
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
-                                <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
-                                <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </DataTemplate.Triggers>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ListView x:Name="TasksList" ItemTemplate="{StaticResource taskTemplate}" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding}" Height="760" BorderThickness="0.5" />
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button x:Name="MinimizeButton" Width="30" Content="_" Click="MinimizeButton_Click"/>
                 <Button x:Name="CloseButton" Width="30" Content="X" Click="CloseButton_Click"/>
@@ -56,4 +55,3 @@
         </Grid>
     </Border>
 </Window>
-    
