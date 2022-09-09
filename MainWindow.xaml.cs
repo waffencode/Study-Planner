@@ -1,14 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using Study_Planner.Components;
+﻿using System.Windows;
 
 namespace Study_Planner
 {
     public partial class MainWindow : Window
     {
-        private readonly ObservableCollection<Task> _tasks = new ObservableCollection<Task>();
-
         public MainWindow()
         {
             InitializeComponent();

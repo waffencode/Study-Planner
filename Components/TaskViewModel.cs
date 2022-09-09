@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows.Controls;
 
 namespace Study_Planner.Components
 {
