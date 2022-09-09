@@ -49,9 +49,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0">
-                <Button x:Name="MinimizeButton" Width="30" Content="_" Margin="0"/>
-                <Button x:Name="CloseButton" Width="30" Content="X" Margin="0"/>
+            <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button x:Name="MinimizeButton" Width="30" Content="_" Click="MinimizeButton_Click"/>
+                <Button x:Name="CloseButton" Width="30" Content="X" Click="CloseButton_Click"/>
             </WrapPanel>
         </Grid>
     </Border>
