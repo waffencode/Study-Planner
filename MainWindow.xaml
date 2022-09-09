@@ -3,15 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Study_Planner"
+        xmlns:c="clr-namespace:Study_Planner.Components"
         mc:Ignorable="d"
         Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False">
     <Window.Resources>
+        <c:TaskViewModel x:Key="tasksDataSource"/>
+        <Style x:Key="MainTaskPanelStyle">
+            <Setter Property="Control.Height" Value="740"/>
+            <Setter Property="Control.BorderThickness" Value="0.5"/>
+        </Style>
+        <Style x:Key="DefaultElementMargin">
+            <Setter Property="Control.Margin" Value="5"/>
+        </Style>
         <DataTemplate x:Key="taskTemplate">
             <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
                 <WrapPanel Width="480">
-                    <Button x:Name="ToggleCompletedButton" Content="Done!" Click="ToggleCompleted_Click" Margin="5"/>
-                    <Button x:Name="DeleteTaskButton" Content="Delete!" Click="DeleteTask_Click" Margin="5"/>
+                    <Button x:Name="ToggleCompletedButton" Content="Done!" Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultElementMargin}"/>
+                    <Button x:Name="DeleteTaskButton" Content="Delete!" Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultElementMargin}"/>
                     <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
                 </WrapPanel>
             </Border>
@@ -26,6 +34,9 @@
             <WrapPanel />
         </ItemsPanelTemplate>
     </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource tasksDataSource}"/>
+    </Window.DataContext>
     <Border Background="White">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -47,18 +58,17 @@
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBox x:Name="DescriptionField" Height="20" Margin="5" />
-                <Button Content="Add Task" Height="30" Click="AddTask_Click" Margin="5" />
+                <TextBox x:Name="DescriptionField" Padding="5" Height="30" Style="{StaticResource DefaultElementMargin}" VerticalAlignment="Center"/>
+                <Button Content="Add Task" Height="30" Command="{Binding AddTaskCommand}" CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" Style="{StaticResource DefaultElementMargin}" />
             </StackPanel>
-            <ListView x:Name="TasksList" 
+            <ListView x:Name="TasksList"
+                      ItemsSource="{Binding Tasks}"
                       ItemTemplate="{StaticResource taskTemplate}"
                       ItemsPanel="{StaticResource taskPanelTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      Style="{StaticResource MainTaskPanelStyle}"
                       Grid.Row="1" 
-                      Grid.Column="3" 
-                      ItemsSource="{Binding}" 
-                      Height="760" 
-                      BorderThickness="0.5" />
+                      Grid.Column="3" />
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button x:Name="MinimizeButton" Width="30" Content="_" Click="MinimizeButton_Click"/>
                 <Button x:Name="CloseButton" Width="30" Content="X" Click="CloseButton_Click"/>
