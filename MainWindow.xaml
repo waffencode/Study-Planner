@@ -57,32 +57,32 @@
             <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3" Height="40" VerticalAlignment="Center">
                 <WrapPanel Width="480" Height="40">
                     <Button x:Name="ToggleCompletedButton" 
-                            Content="Done!" 
+                            Content="Done" 
                             Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" 
                             CommandParameter="{Binding}" 
                             Style="{StaticResource DefaultButtonStyle}"
                             Width="40" />
                     <Button x:Name="DeleteTaskButton" 
-                            Content="Delete!" 
+                            Content="Delete" 
                             Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" 
                             CommandParameter="{Binding}" 
                             Style="{StaticResource DefaultButtonStyle}"
                             Width="40" />
                     <Button x:Name="EditTaskButton" 
-                            Content="Edit!" 
+                            Content="Edit" 
                             Command="{Binding Source={StaticResource tasksDataSource}, Path=EditTaskCommand}" 
                             CommandParameter="{Binding}" 
                             Style="{StaticResource DefaultButtonStyle}"
                             Width="40" />
                     <Button x:Name="SaveTaskButton" 
-                            Content="Save!"
+                            Content="Save"
                             Command="{Binding Source={StaticResource tasksDataSource}, Path=SaveTaskCommand}" 
                             CommandParameter="{Binding ElementName=TaskDescriptionEditBox}"
                             Style="{StaticResource DefaultButtonStyle}" 
                             Width="40" />
 
-                    <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" />
-                    <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Padding="3" Margin="10,5,50,5" />
+                    <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
+                    <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
                 </WrapPanel>
             </Border>
             <DataTemplate.Triggers>
