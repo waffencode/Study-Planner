@@ -8,18 +8,56 @@
         Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False">
     <Window.Resources>
         <c:TaskViewModel x:Key="tasksDataSource"/>
-        <Style x:Key="MainTaskPanelStyle">
+        <Style x:Key="RoundedBorderStyle" TargetType="Border">
+            <Setter Property="Control.BorderThickness" Value="0.3"/>
+            <Setter Property="Control.BorderBrush" Value="Gray"/>
+            <Setter Property="Control.Margin" Value="5"/>
+            <Setter Property="Control.Padding" Value="5"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+        <Style x:Key="MainTaskPanelStyle" TargetType="ListView">
             <Setter Property="Control.Height" Value="740"/>
-            <Setter Property="Control.BorderThickness" Value="0.5"/>
+            <Setter Property="Control.BorderThickness" Value="0"/>
         </Style>
         <Style x:Key="DefaultElementMargin">
             <Setter Property="Control.Margin" Value="5"/>
         </Style>
+        <Style x:Key="WindowControlButtonStyle">
+            <Setter Property="Control.BorderThickness" Value="0"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+            <Setter Property="Control.Background" Value="White"/>
+        </Style>
+        <Style x:Key="DefaultButtonStyle" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="3"
+                                Background="{TemplateBinding Background}">
+
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Control.Margin" Value="5"/>
+                <Setter Property="Control.BorderThickness" Value="0"/>
+                <Setter Property="Control.Background" Value="#FFEDEDED"/>
+                <Setter Property="Control.FontWeight" Value="Bold"/>
+                <Setter Property="Control.Padding" Value="7" />
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="#FFC3C3C3" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate x:Key="taskTemplate">
             <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
                 <WrapPanel Width="480">
-                    <Button x:Name="ToggleCompletedButton" Content="Done!" Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultElementMargin}"/>
-                    <Button x:Name="DeleteTaskButton" Content="Delete!" Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultElementMargin}"/>
+                    <Button x:Name="ToggleCompletedButton" Content="Done!" Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultButtonStyle}"/>
+                    <Button x:Name="DeleteTaskButton" Content="Delete!" Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultButtonStyle}"/>
                     <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
                 </WrapPanel>
             </Border>
@@ -48,7 +86,7 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -58,20 +96,24 @@
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <TextBox x:Name="DescriptionField" Padding="5" Height="30" Style="{StaticResource DefaultElementMargin}" VerticalAlignment="Center"/>
-                <Button Content="Add Task" Height="30" Command="{Binding AddTaskCommand}" CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" Style="{StaticResource DefaultElementMargin}" />
+                <Border Style="{StaticResource RoundedBorderStyle}">
+                    <TextBox x:Name="DescriptionField" Margin="5" BorderThickness="0" Height="20" VerticalAlignment="Center"/>
+                </Border>
+                <Button Content="Add Task" Height="30" Command="{Binding AddTaskCommand}" CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" Style="{StaticResource DefaultButtonStyle}"/>
             </StackPanel>
-            <ListView x:Name="TasksList"
+            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3" >
+                <ListView x:Name="TasksList"
+                      Margin="5"
                       ItemsSource="{Binding Tasks}"
                       ItemTemplate="{StaticResource taskTemplate}"
                       ItemsPanel="{StaticResource taskPanelTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Style="{StaticResource MainTaskPanelStyle}"
-                      Grid.Row="1" 
-                      Grid.Column="3" />
+                      />
+            </Border>
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button x:Name="MinimizeButton" Width="30" Content="_" Click="MinimizeButton_Click"/>
-                <Button x:Name="CloseButton" Width="30" Content="X" Click="CloseButton_Click"/>
+                <Button x:Name="MinimizeButton" Width="30" Height="30" Content="—" Click="MinimizeButton_Click" Style="{StaticResource WindowControlButtonStyle}" />
+                <Button x:Name="CloseButton" Width="30" Height="30" Content="╳" Click="CloseButton_Click" Style="{StaticResource WindowControlButtonStyle}" />
             </WrapPanel>
         </Grid>
     </Border>
