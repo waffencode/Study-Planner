@@ -38,9 +38,14 @@
             <Setter Property="Control.Padding" Value="5"/>
             <Setter Property="CornerRadius" Value="3"/>
         </Style>
-        <Style x:Key="MainTaskPanelStyle" TargetType="ListView">
+        <Style x:Key="MainTaskPanelStyle" TargetType="ItemsControl">
             <Setter Property="Control.Height" Value="710"/>
             <Setter Property="Control.BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="DefaultElementMargin">
             <Setter Property="Control.Margin" Value="5"/>
@@ -93,7 +98,7 @@
             </Style.Triggers>
         </Style>
         <DataTemplate x:Key="taskTemplate">
-            <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3" Height="40" VerticalAlignment="Center">
+            <Border BorderBrush="Gray" BorderThickness="0.3" CornerRadius="3" Height="40" VerticalAlignment="Center">
                 <WrapPanel Width="480" Height="40">
                     <Button x:Name="ToggleCompletedButton" 
                             Content="Done" 
@@ -125,26 +130,64 @@
                 </WrapPanel>
             </Border>
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
-                    <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
-                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsEditModeEnabled}" Value="True">
-                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsEditModeEnabled}" Value="False">
-                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
-                    <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
-                    <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
-                </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=IsCompleted}" Value="True" />
+                        <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=IsCompleted}" Value="False" />
+                        <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=IsCompleted}" Value="True" />
+                        <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=IsCompleted}" Value="False" />
+                        <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="None"/>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="taskPanelTemplate">
@@ -185,13 +228,13 @@
                         Style="{StaticResource DefaultButtonStyle}"/>
             </StackPanel>
             <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3" >
-                <ListView x:Name="TasksList"
+                <ItemsControl x:Name="TasksList"
                       Margin="5"
                       ItemsSource="{Binding Tasks}"
                       ItemTemplate="{StaticResource taskTemplate}"
                       ItemsPanel="{StaticResource taskPanelTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Style="{StaticResource MainTaskPanelStyle}"
+                      Style="{StaticResource MainTaskPanelStyle}" 
                       />
             </Border>
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right">
