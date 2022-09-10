@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace Study_Planner.Components
 {
@@ -41,6 +42,34 @@ namespace Study_Planner.Components
                 {
                     Task selectedTask = obj as Task;
                     Tasks.Remove(selectedTask);
+                }));
+            }
+        }
+
+        private Command _editTaskCommand;
+        public Command EditTaskCommand
+        {
+            get
+            {
+                return _editTaskCommand ?? (_editTaskCommand = new Command(obj =>
+                {
+                    Task selectedTask = obj as Task;
+                    selectedTask.ToggleEditState();
+                }));
+            }
+        }
+
+        private Command _saveTaskCommand;
+        public Command SaveTaskCommand
+        {
+            get
+            {
+                return _saveTaskCommand ?? (_saveTaskCommand = new Command(obj =>
+                {
+                    TextBox selectedBox = obj as TextBox;
+                    Task selectedTask = (Task)selectedBox.DataContext;
+                    selectedTask.ShortDescription = selectedBox.Text;
+                    selectedTask.ToggleEditState();
                 }));
             }
         }

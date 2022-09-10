@@ -10,10 +10,13 @@ namespace Study_Planner.Components
         public int Id { get => _id; set => _id = value; }
 
         private string _shortDescription;
-        public string ShortDescription { get => _shortDescription; set => _shortDescription = value; }
+        public string ShortDescription { get => _shortDescription; set { _shortDescription = value; NotifyPropertyChanged(); } }
 
         private bool _isCompleted = false;
         public bool IsCompleted { get => _isCompleted; set { _isCompleted = value; NotifyPropertyChanged(); } }
+
+        private bool _isEditModeEnabled = false;
+        public bool IsEditModeEnabled { get => _isEditModeEnabled; set { _isEditModeEnabled = value; NotifyPropertyChanged(); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,12 +29,16 @@ namespace Study_Planner.Components
         {
             Id = givenID;
             ShortDescription = givenDescription;
-            IsCompleted = false;
         }
 
         public void ToggleCompletedState()
         {
             IsCompleted = !IsCompleted;
+        }
+
+        public void ToggleEditState()
+        {
+            IsEditModeEnabled = !IsEditModeEnabled;
         }
     }
 }

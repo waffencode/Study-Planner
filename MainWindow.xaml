@@ -56,15 +56,51 @@
         <DataTemplate x:Key="taskTemplate">
             <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="3">
                 <WrapPanel Width="480">
-                    <Button x:Name="ToggleCompletedButton" Content="Done!" Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultButtonStyle}"/>
-                    <Button x:Name="DeleteTaskButton" Content="Delete!" Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" CommandParameter="{Binding}" Style="{StaticResource DefaultButtonStyle}"/>
-                    <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10"/>
+                    <Button x:Name="ToggleCompletedButton" 
+                            Content="Done!" 
+                            Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" 
+                            CommandParameter="{Binding}" 
+                            Style="{StaticResource DefaultButtonStyle}"/>
+                    <Button x:Name="DeleteTaskButton" 
+                            Content="Delete!" 
+                            Command="{Binding Source={StaticResource tasksDataSource}, Path=DeleteTaskCommand}" 
+                            CommandParameter="{Binding}" 
+                            Style="{StaticResource DefaultButtonStyle}"/>
+                    <Button x:Name="EditTaskButton" 
+                            Content="Edit!" 
+                            Command="{Binding Source={StaticResource tasksDataSource}, Path=EditTaskCommand}" 
+                            CommandParameter="{Binding}" 
+                            Style="{StaticResource DefaultButtonStyle}"/>
+                    <Button x:Name="SaveTaskButton" 
+                            Content="Save!"
+                            Command="{Binding Source={StaticResource tasksDataSource}, Path=SaveTaskCommand}" 
+                            CommandParameter="{Binding ElementName=TaskDescriptionEditBox}"
+                            Style="{StaticResource DefaultButtonStyle}" />
+
+                    <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" />
+                    <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Padding="3" Margin="10,10,50,10" />
                 </WrapPanel>
             </Border>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=IsCompleted}" Value="True">
                     <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
                     <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsEditModeEnabled}" Value="True">
+                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsEditModeEnabled}" Value="False">
+                    <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
+                    <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -99,7 +135,11 @@
                 <Border Style="{StaticResource RoundedBorderStyle}">
                     <TextBox x:Name="DescriptionField" Margin="5" BorderThickness="0" Height="20" VerticalAlignment="Center"/>
                 </Border>
-                <Button Content="Add Task" Height="30" Command="{Binding AddTaskCommand}" CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" Style="{StaticResource DefaultButtonStyle}"/>
+                <Button Content="Add Task" 
+                        Height="30" 
+                        Command="{Binding AddTaskCommand}" 
+                        CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" 
+                        Style="{StaticResource DefaultButtonStyle}"/>
             </StackPanel>
             <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3" >
                 <ListView x:Name="TasksList"
