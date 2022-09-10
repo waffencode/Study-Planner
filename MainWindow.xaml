@@ -5,9 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:Study_Planner.Components"
         mc:Ignorable="d"
-        Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False">
+        Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize">
     <Window.Resources>
         <c:TaskViewModel x:Key="tasksDataSource"/>
+        <Style x:Key="CloseButtonStyle" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Control.BorderThickness" Value="0"/>
+                <Setter Property="Control.FontWeight" Value="Bold"/>
+                <Setter Property="Control.Background" Value="White"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Control.Foreground" Value="White" />
+                    <Setter Property="Control.Background" Value="#FFE81325" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="RoundedBorderStyle" TargetType="Border">
             <Setter Property="Control.BorderThickness" Value="0.3"/>
             <Setter Property="Control.BorderBrush" Value="Gray"/>
@@ -16,16 +39,33 @@
             <Setter Property="CornerRadius" Value="3"/>
         </Style>
         <Style x:Key="MainTaskPanelStyle" TargetType="ListView">
-            <Setter Property="Control.Height" Value="740"/>
+            <Setter Property="Control.Height" Value="710"/>
             <Setter Property="Control.BorderThickness" Value="0"/>
         </Style>
         <Style x:Key="DefaultElementMargin">
             <Setter Property="Control.Margin" Value="5"/>
         </Style>
-        <Style x:Key="WindowControlButtonStyle">
-            <Setter Property="Control.BorderThickness" Value="0"/>
-            <Setter Property="Control.FontWeight" Value="Bold"/>
-            <Setter Property="Control.Background" Value="White"/>
+        <Style x:Key="MinimizeButtonStyle" TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Control.BorderThickness" Value="0"/>
+                <Setter Property="Control.FontWeight" Value="Bold"/>
+                <Setter Property="Control.Background" Value="White"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="#FFEDEDED" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="DefaultButtonStyle" TargetType="Button">
             <Style.Setters>
@@ -33,10 +73,9 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="3"
-                                Background="{TemplateBinding Background}">
-
+                                    Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -133,7 +172,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Border Style="{StaticResource RoundedBorderStyle}">
@@ -155,9 +194,9 @@
                       Style="{StaticResource MainTaskPanelStyle}"
                       />
             </Border>
-            <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button x:Name="MinimizeButton" Width="30" Height="30" Content="—" Click="MinimizeButton_Click" Style="{StaticResource WindowControlButtonStyle}" />
-                <Button x:Name="CloseButton" Width="30" Height="30" Content="╳" Click="CloseButton_Click" Style="{StaticResource WindowControlButtonStyle}" />
+            <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right">
+                <Button x:Name="MinimizeButton" Width="50" Height="30" Content="—" Click="MinimizeButton_Click" Style="{StaticResource MinimizeButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button x:Name="CloseButton" Width="50" Height="30" Content="✕" Click="CloseButton_Click" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </WrapPanel>
         </Grid>
     </Border>
