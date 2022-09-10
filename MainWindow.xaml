@@ -124,6 +124,12 @@
                             CommandParameter="{Binding ElementName=TaskDescriptionEditBox}"
                             Style="{StaticResource DefaultButtonStyle}" 
                             Width="40" />
+                    <Button x:Name="UndoneTaskButton" 
+                            Content="Undone"
+                            Command="{Binding Source={StaticResource tasksDataSource}, Path=ToggleCompletedCommand}" 
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource DefaultButtonStyle}" 
+                            Width="50" />
 
                     <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
                     <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
@@ -142,6 +148,7 @@
                         <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
                         <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Visible"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -156,6 +163,7 @@
                         <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
                         <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -171,6 +179,7 @@
                         <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
                         <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -186,6 +195,7 @@
                         <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
                         <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
                         <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
             </DataTemplate.Triggers>
