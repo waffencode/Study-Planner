@@ -98,7 +98,7 @@
             </Style.Triggers>
         </Style>
         <DataTemplate x:Key="taskTemplate">
-            <Border BorderBrush="Gray" BorderThickness="0.3" CornerRadius="3" Height="40" VerticalAlignment="Center">
+            <Border BorderBrush="Gray" BorderThickness="0.3" CornerRadius="3" Height="40" VerticalAlignment="Center" Margin="3">
                 <WrapPanel Width="480" Height="40">
                     <Button x:Name="ToggleCompletedButton" 
                             Content="Done" 
