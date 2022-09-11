@@ -8,6 +8,9 @@
         Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize">
     <Window.Resources>
         <c:TaskViewModel x:Key="tasksDataSource" />
+        <Style x:Key="DefaultElementMargin">
+            <Setter Property="Control.Margin" Value="5" />
+        </Style>
         <Style x:Key="WindowControlsButtonBaseStyle" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -42,20 +45,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="RoundedBorderStyle" TargetType="Border">
-            <Setter Property="Control.BorderThickness" Value="0.3" />
+        <Style x:Key="RoundedBorderStyle" BasedOn="{StaticResource DefaultElementMargin}" TargetType="Border">
+            <Setter Property="Control.BorderThickness" Value="0.5" />
             <Setter Property="Control.BorderBrush" Value="Gray" />
-            <Setter Property="Control.Margin" Value="5" />
-            <Setter Property="Control.Padding" Value="5" />
+            <Setter Property="Control.Padding" Value="0" />
             <Setter Property="CornerRadius" Value="3" />
         </Style>
-        <Style x:Key="MainTaskPanelStyle" TargetType="ItemsControl">
-            <Setter Property="Control.Margin" Value="5" />
+        <Style x:Key="MainTaskPanelStyle" BasedOn="{StaticResource DefaultElementMargin}" TargetType="ItemsControl">
             <Setter Property="Control.Height" Value="710" />
             <Setter Property="Control.BorderThickness" Value="0" />
-        </Style>
-        <Style x:Key="DefaultElementMargin">
-            <Setter Property="Control.Margin" Value="5" />
+            <Setter Property="Control.Margin" Value="5,5,5,25" />
         </Style>
         <Style x:Key="DefaultButtonStyle" TargetType="Button">
             <Style.Setters>
@@ -115,7 +114,6 @@
                             CommandParameter="{Binding}"
                             Style="{StaticResource DefaultButtonStyle}" 
                             Width="50" />
-
                     <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
                     <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
                 </WrapPanel>
@@ -188,6 +186,49 @@
         <ItemsPanelTemplate x:Key="taskPanelTemplate">
             <WrapPanel />
         </ItemsPanelTemplate>
+        <ControlTemplate x:Key="ItemsControlTemplate" TargetType="{x:Type ItemsControl}">
+            <Border Style="{StaticResource RoundedBorderStyle}" Margin="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+            </Border>
+        </ControlTemplate>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Height="30" BorderBrush="Gray" BorderThickness="0.7" Style="{StaticResource RoundedBorderStyle}" Margin="5" Padding="3" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource tasksDataSource}"/>
@@ -204,33 +245,24 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <Border Style="{StaticResource RoundedBorderStyle}">
-                    <TextBox x:Name="DescriptionField" Margin="5" BorderThickness="0" Height="20" VerticalAlignment="Center"/>
-                </Border>
+                <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="DescriptionField"  BorderThickness="0" VerticalAlignment="Center"/>
                 <Button Content="Add Task" 
                         Height="30"
                         Command="{Binding AddTaskCommand}" 
                         CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" 
                         Style="{StaticResource DefaultButtonStyle}" />
             </StackPanel>
-            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3">
-                <ItemsControl x:Name="TasksList" 
+            <ItemsControl Template="{DynamicResource ItemsControlTemplate}" x:Name="TasksList" 
                               Grid.Row="1" 
                               Grid.Column="3"
                               ItemsSource="{Binding Tasks}"
                               ItemTemplate="{StaticResource taskTemplate}"
                               ItemsPanel="{StaticResource taskPanelTemplate}"
-                              Style="{StaticResource MainTaskPanelStyle}" />
-            </Border>
+                              Style="{StaticResource MainTaskPanelStyle}" Margin="5,5,5,25" />
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right">
                 <Button x:Name="MinimizeButton" Content="—" Click="MinimizeButton_Click" Style="{StaticResource MinimizeButtonStyle}" />
                 <Button x:Name="CloseButton" Content="✕" Click="CloseButton_Click" Style="{StaticResource CloseButtonStyle}" />
