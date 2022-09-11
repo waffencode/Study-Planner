@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Windows.Input;
-using System.Threading.Tasks;
-using System.Text.Json.Nodes;
 
 namespace Study_Planner.Components
 {
