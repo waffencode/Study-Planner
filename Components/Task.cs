@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 namespace Study_Planner.Components
 {
@@ -25,10 +26,11 @@ namespace Study_Planner.Components
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Task(int givenID, string givenDescription)
+        [JsonConstructor]
+        public Task(int id, string shortDescription)
         {
-            Id = givenID;
-            ShortDescription = givenDescription;
+            Id = id;
+            ShortDescription = shortDescription;
         }
 
         public void ToggleCompletedState()

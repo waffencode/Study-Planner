@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace Study_Planner.Components
@@ -6,6 +7,7 @@ namespace Study_Planner.Components
     public class TaskViewModel
     {
         public ObservableCollection<Task> Tasks { get; set; }
+        public FileManager MainFileManager;
 
         private Command _addTaskCommand;
         public Command AddTaskCommand
@@ -15,7 +17,7 @@ namespace Study_Planner.Components
                 return _addTaskCommand ?? (_addTaskCommand = new Command(obj => 
                 {
                     string description = obj as string;
-                    Tasks.Add(new Task(Tasks.Count, description)); 
+                    Tasks.Add(new Task(Tasks.Count, description));
                 }));
             }
         }
@@ -77,6 +79,24 @@ namespace Study_Planner.Components
         public TaskViewModel()
         {
             Tasks = new ObservableCollection<Task>();
+            MainFileManager = new FileManager();
+        }
+
+        public void OnWindowClose()
+        {
+            MainFileManager.SaveTasksToFile(Tasks);
+        }
+
+        public void OnProgramStartup()
+        {
+            ObservableCollection<Task> LoadedTasks = MainFileManager.LoadTasksFromFile();
+
+            foreach (Task task in LoadedTasks)
+            {
+                Tasks.Add(task);
+            }
+
+            LoadedTasks.Clear();
         }
     }
 }
