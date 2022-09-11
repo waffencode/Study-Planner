@@ -1,29 +1,40 @@
 ﻿<Window x:Class="Study_Planner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:Study_Planner.Components"
         mc:Ignorable="d"
         Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize">
     <Window.Resources>
-        <c:TaskViewModel x:Key="tasksDataSource"/>
-        <Style x:Key="CloseButtonStyle" TargetType="Button">
-            <Style.Setters>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Control.BorderThickness" Value="0"/>
-                <Setter Property="Control.FontWeight" Value="Bold"/>
-                <Setter Property="Control.Background" Value="White"/>
-            </Style.Setters>
+        <c:TaskViewModel x:Key="tasksDataSource" />
+        <Style x:Key="WindowControlsButtonBaseStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Control.BorderThickness" Value="0" />
+            <Setter Property="Control.FontWeight" Value="Bold" />
+            <Setter Property="Control.Background" Value="White" />
+        </Style>
+        <Style x:Key="MinimizeButtonStyle" BasedOn="{StaticResource WindowControlsButtonBaseStyle}" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Control.Background" Value="#FFEDEDED" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CloseButtonStyle" BasedOn="{StaticResource WindowControlsButtonBaseStyle}" TargetType="Button">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Control.Foreground" Value="White" />
@@ -32,45 +43,19 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="RoundedBorderStyle" TargetType="Border">
-            <Setter Property="Control.BorderThickness" Value="0.3"/>
-            <Setter Property="Control.BorderBrush" Value="Gray"/>
-            <Setter Property="Control.Margin" Value="5"/>
-            <Setter Property="Control.Padding" Value="5"/>
-            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Control.BorderThickness" Value="0.3" />
+            <Setter Property="Control.BorderBrush" Value="Gray" />
+            <Setter Property="Control.Margin" Value="5" />
+            <Setter Property="Control.Padding" Value="5" />
+            <Setter Property="CornerRadius" Value="3" />
         </Style>
         <Style x:Key="MainTaskPanelStyle" TargetType="ItemsControl">
-            <Setter Property="Control.Height" Value="710"/>
-            <Setter Property="Control.BorderThickness" Value="0"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Control.Background" Value="White" />
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Control.Margin" Value="5" />
+            <Setter Property="Control.Height" Value="710" />
+            <Setter Property="Control.BorderThickness" Value="0" />
         </Style>
         <Style x:Key="DefaultElementMargin">
-            <Setter Property="Control.Margin" Value="5"/>
-        </Style>
-        <Style x:Key="MinimizeButtonStyle" TargetType="Button">
-            <Style.Setters>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Control.BorderThickness" Value="0"/>
-                <Setter Property="Control.FontWeight" Value="Bold"/>
-                <Setter Property="Control.Background" Value="White"/>
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Control.Background" Value="#FFEDEDED" />
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Control.Margin" Value="5" />
         </Style>
         <Style x:Key="DefaultButtonStyle" TargetType="Button">
             <Style.Setters>
@@ -80,15 +65,15 @@
                             <Border CornerRadius="3"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Control.Margin" Value="5"/>
-                <Setter Property="Control.BorderThickness" Value="0"/>
-                <Setter Property="Control.Background" Value="#FFEDEDED"/>
-                <Setter Property="Control.FontWeight" Value="Bold"/>
+                <Setter Property="Control.Margin" Value="5" />
+                <Setter Property="Control.BorderThickness" Value="0" />
+                <Setter Property="Control.Background" Value="#FFEDEDED" />
+                <Setter Property="Control.FontWeight" Value="Bold" />
                 <Setter Property="Control.Padding" Value="7" />
             </Style.Setters>
             <Style.Triggers>
@@ -142,13 +127,13 @@
                         <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="True" />
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
-                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Visible"/>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Visible" />
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -157,13 +142,13 @@
                         <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="True" />
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
-                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed" />
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -172,14 +157,14 @@
                         <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="False" />
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
-                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough"/>
-                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="Strikethrough" />
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed" />
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
                 <MultiDataTrigger>
@@ -188,14 +173,14 @@
                         <Condition Binding="{Binding Path=IsEditModeEnabled}" Value="False" />
                     </MultiDataTrigger.Conditions>
                     <MultiDataTrigger.Setters>
-                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="None"/>
-                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible"/>
-                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed"/>
-                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed"/>
+                        <Setter TargetName="TaskLabel" Property="TextDecorations" Value="None" />
+                        <Setter TargetName="ToggleCompletedButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="DeleteTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="EditTaskButton" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="SaveTaskButton" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="TaskLabel" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="TaskDescriptionEditBox" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="UndoneTaskButton" Property="Visibility" Value="Collapsed" />
                     </MultiDataTrigger.Setters>
                 </MultiDataTrigger>
             </DataTemplate.Triggers>
@@ -232,24 +217,23 @@
                     <TextBox x:Name="DescriptionField" Margin="5" BorderThickness="0" Height="20" VerticalAlignment="Center"/>
                 </Border>
                 <Button Content="Add Task" 
-                        Height="30" 
+                        Height="30"
                         Command="{Binding AddTaskCommand}" 
                         CommandParameter="{Binding ElementName=DescriptionField, Path=Text}" 
-                        Style="{StaticResource DefaultButtonStyle}"/>
+                        Style="{StaticResource DefaultButtonStyle}" />
             </StackPanel>
-            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3" >
-                <ItemsControl x:Name="TasksList"
-                      Margin="5"
-                      ItemsSource="{Binding Tasks}"
-                      ItemTemplate="{StaticResource taskTemplate}"
-                      ItemsPanel="{StaticResource taskPanelTemplate}"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      Style="{StaticResource MainTaskPanelStyle}" 
-                      />
+            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" Grid.Column="3">
+                <ItemsControl x:Name="TasksList" 
+                              Grid.Row="1" 
+                              Grid.Column="3"
+                              ItemsSource="{Binding Tasks}"
+                              ItemTemplate="{StaticResource taskTemplate}"
+                              ItemsPanel="{StaticResource taskPanelTemplate}"
+                              Style="{StaticResource MainTaskPanelStyle}" />
             </Border>
             <WrapPanel Grid.Column="5" Grid.Row="0" HorizontalAlignment="Right">
-                <Button x:Name="MinimizeButton" Width="50" Height="30" Content="—" Click="MinimizeButton_Click" Style="{StaticResource MinimizeButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                <Button x:Name="CloseButton" Width="50" Height="30" Content="✕" Click="CloseButton_Click" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button x:Name="MinimizeButton" Content="—" Click="MinimizeButton_Click" Style="{StaticResource MinimizeButtonStyle}" />
+                <Button x:Name="CloseButton" Content="✕" Click="CloseButton_Click" Style="{StaticResource CloseButtonStyle}" />
             </WrapPanel>
         </Grid>
     </Border>
