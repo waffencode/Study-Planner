@@ -6,35 +6,30 @@ namespace Study_Planner.Components
 {
     public class FileManager
     {
+        private const string taskStorageFilePath = "SavedTasks.json";
+
         public void SaveTasksToFile(ObservableCollection<Task> Tasks)
         {
-            string path = "SavedTasks.json";
-            StreamWriter JsonFileStream = new StreamWriter(path);
+            StreamWriter JsonFileStream = new(taskStorageFilePath);
 
             foreach (Task task in Tasks)
             {
-                JsonFileStream.WriteLine(JsonSerializer.Serialize<Task>(task));
+                JsonFileStream.WriteLine(JsonSerializer.Serialize(task));
             }
 
             JsonFileStream.Close();
         }
 
-        public ObservableCollection<Task> LoadTasksFromFile()
+        public void LoadTasksFromFile(ObservableCollection<Task> Tasks)
         {
-            ObservableCollection<Task> Tasks = new ObservableCollection<Task>();
-            string path = "SavedTasks.json";
-            StreamReader JsonFileStream = new StreamReader(path);
-            string jsonTask;
+            StreamReader JsonFileStream = new(taskStorageFilePath);
 
-            while ((jsonTask = JsonFileStream.ReadLine()) != null)
+            while (!JsonFileStream.EndOfStream)
             {
-                Task task = (Task)JsonSerializer.Deserialize<Task>(jsonTask);
-                Tasks.Add(task);
+                Tasks.Add(JsonSerializer.Deserialize<Task>(JsonFileStream.ReadLine()));
             }
 
             JsonFileStream.Close();
-
-            return Tasks;
         }
     }
 }

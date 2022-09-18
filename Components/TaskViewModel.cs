@@ -13,11 +13,11 @@ namespace Study_Planner.Components
         {
             get
             {
-                return _addTaskCommand ?? (_addTaskCommand = new Command(obj => 
+                return _addTaskCommand ??= new Command(obj =>
                 {
                     string description = obj as string;
                     Tasks.Add(new Task(Tasks.Count, description));
-                }));
+                });
             }
         }
 
@@ -26,11 +26,11 @@ namespace Study_Planner.Components
         {
             get
             {
-                return _toggleCompletedCommand ?? (_toggleCompletedCommand = new Command(obj =>
+                return _toggleCompletedCommand ??= new Command(obj =>
                 {
                     Task selectedTask = obj as Task;
                     selectedTask.ToggleCompletedState();
-                }));
+                });
             }
         }
 
@@ -39,11 +39,11 @@ namespace Study_Planner.Components
         {
             get
             {
-                return _deleteTaskCommand ?? (_deleteTaskCommand = new Command(obj =>
+                return _deleteTaskCommand ??= new Command(obj =>
                 {
                     Task selectedTask = obj as Task;
                     Tasks.Remove(selectedTask);
-                }));
+                });
             }
         }
 
@@ -52,11 +52,11 @@ namespace Study_Planner.Components
         {
             get
             {
-                return _editTaskCommand ?? (_editTaskCommand = new Command(obj =>
+                return _editTaskCommand ??= new Command(obj =>
                 {
                     Task selectedTask = obj as Task;
                     selectedTask.ToggleEditState();
-                }));
+                });
             }
         }
 
@@ -65,13 +65,13 @@ namespace Study_Planner.Components
         {
             get
             {
-                return _saveTaskCommand ?? (_saveTaskCommand = new Command(obj =>
+                return _saveTaskCommand ??= new Command(obj =>
                 {
                     TextBox selectedBox = obj as TextBox;
                     Task selectedTask = (Task)selectedBox.DataContext;
                     selectedTask.ShortDescription = selectedBox.Text;
                     selectedTask.ToggleEditState();
-                }));
+                });
             }
         }
 
@@ -88,14 +88,7 @@ namespace Study_Planner.Components
 
         public void OnProgramStartup()
         {
-            ObservableCollection<Task> LoadedTasks = MainFileManager.LoadTasksFromFile();
-
-            foreach (Task task in LoadedTasks)
-            {
-                Tasks.Add(task);
-            }
-
-            LoadedTasks.Clear();
+            MainFileManager.LoadTasksFromFile(Tasks);
         }
     }
 }

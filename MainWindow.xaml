@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="clr-namespace:Study_Planner.Components"
         mc:Ignorable="d"
-        Title="Study Planner" Height="800" Width="1200" Background="White" WindowStyle="None" AllowsTransparency="False" ResizeMode="NoResize">
+        Height="800" 
+        Width="1200" 
+        Background="White" 
+        WindowStyle="None" 
+        AllowsTransparency="False" 
+        ResizeMode="NoResize">
     <Window.Resources>
         <c:TaskViewModel x:Key="tasksDataSource" />
         <Style x:Key="DefaultElementMargin">
@@ -115,7 +120,11 @@
                             Style="{StaticResource DefaultButtonStyle}" 
                             Width="50" />
                     <TextBlock x:Name="TaskLabel" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
-                    <TextBox x:Name="TaskDescriptionEditBox" DataContext="{Binding}" Text="{Binding Path=ShortDescription}" Margin="10,10,50,10" Height="20" />
+                    <TextBox x:Name="TaskDescriptionEditBox" 
+                             DataContext="{Binding}" 
+                             Text="{Binding Path=ShortDescription}" 
+                             Margin="10,10,50,10" 
+                             Height="20" />
                 </WrapPanel>
             </Border>
             <DataTemplate.Triggers>
@@ -187,7 +196,10 @@
             <WrapPanel />
         </ItemsPanelTemplate>
         <ControlTemplate x:Key="ItemsControlTemplate" TargetType="{x:Type ItemsControl}">
-            <Border Style="{StaticResource RoundedBorderStyle}" Margin="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+            <Border Style="{StaticResource RoundedBorderStyle}" 
+                    Margin="0"
+                    Background="{TemplateBinding Background}" 
+                    SnapsToDevicePixels="true">
                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
             </Border>
         </ControlTemplate>
@@ -205,8 +217,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" Height="30" BorderBrush="Gray" BorderThickness="0.7" Style="{StaticResource RoundedBorderStyle}" Margin="5" Padding="3" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Border x:Name="border" 
+                                Height="30" 
+                                BorderBrush="Gray" 
+                                BorderThickness="0.7" 
+                                Style="{StaticResource RoundedBorderStyle}" 
+                                Margin="5" 
+                                Padding="3" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Focusable="false" 
+                                          HorizontalScrollBarVisibility="Hidden" 
+                                          VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
