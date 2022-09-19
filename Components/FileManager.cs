@@ -8,7 +8,7 @@ namespace Study_Planner.Components
     {
         public static void SaveCollectionToFile<T>(ObservableCollection<T> Collection, string filePath)
         {
-            StreamWriter JsonFileStream = new(filePath);
+            StreamWriter JsonFileStream = (File.Exists(filePath)) ? new(filePath) : new(File.Create(filePath));
 
             foreach (T element in Collection)
             {
@@ -20,7 +20,7 @@ namespace Study_Planner.Components
 
         public static void LoadCollectionFromFile<T>(ObservableCollection<T> Collection, string filePath)
         {
-            StreamReader JsonFileStream = new(filePath);
+            StreamReader JsonFileStream = (File.Exists(filePath)) ? new(filePath) : new(File.Create(filePath));
 
             while (!JsonFileStream.EndOfStream)
             {
