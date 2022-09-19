@@ -16,7 +16,7 @@ namespace Study_Planner
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            MainViewModel.OnWindowClose();
+            MainViewModel.OnProgramShutdown();
             Close();
         }
 

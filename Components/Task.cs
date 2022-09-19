@@ -33,14 +33,8 @@ namespace Study_Planner.Components
             ShortDescription = shortDescription;
         }
 
-        public void ToggleCompletedState()
-        {
-            IsCompleted = !IsCompleted;
-        }
+        public void ToggleCompletedState() => IsCompleted = !IsCompleted;
 
-        public void ToggleEditState()
-        {
-            IsEditModeEnabled = !IsEditModeEnabled;
-        }
+        public void ToggleEditState() => IsEditModeEnabled = !IsEditModeEnabled;
     }
 }

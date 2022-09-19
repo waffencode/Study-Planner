@@ -4,29 +4,27 @@ using System.Text.Json;
 
 namespace Study_Planner.Components
 {
-    public class FileManager
+    public static class FileManager
     {
-        private const string taskStorageFilePath = "SavedTasks.json";
-
-        public void SaveTasksToFile(ObservableCollection<Task> Tasks)
+        public static void SaveCollectionToFile<T>(ObservableCollection<T> Collection, string filePath)
         {
-            StreamWriter JsonFileStream = new(taskStorageFilePath);
+            StreamWriter JsonFileStream = new(filePath);
 
-            foreach (Task task in Tasks)
+            foreach (T element in Collection)
             {
-                JsonFileStream.WriteLine(JsonSerializer.Serialize(task));
+                JsonFileStream.WriteLine(JsonSerializer.Serialize(element));
             }
 
             JsonFileStream.Close();
         }
 
-        public void LoadTasksFromFile(ObservableCollection<Task> Tasks)
+        public static void LoadCollectionFromFile<T>(ObservableCollection<T> Collection, string filePath)
         {
-            StreamReader JsonFileStream = new(taskStorageFilePath);
+            StreamReader JsonFileStream = new(filePath);
 
             while (!JsonFileStream.EndOfStream)
             {
-                Tasks.Add(JsonSerializer.Deserialize<Task>(JsonFileStream.ReadLine()));
+                Collection.Add(JsonSerializer.Deserialize<T>(JsonFileStream.ReadLine()));
             }
 
             JsonFileStream.Close();
