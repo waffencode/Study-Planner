@@ -11,7 +11,7 @@ namespace Study_Planner.Components
         private readonly string tasksFilePath = ConfigurationManager.AppSettings.Get("tasksFileName");
 
         private Command _addTaskCommand;
-        public Command AddTaskCommand => _addTaskCommand ??= new Command(obj => Tasks.Add(new Task(Tasks.Count, obj as string)));
+        public Command AddTaskCommand => _addTaskCommand ??= new Command(obj => Tasks.Add(new Task(obj as string)));
 
         private Command _toggleCompletedCommand;
         public Command ToggleCompletedCommand => _toggleCompletedCommand ??= new Command(obj => (obj as Task).ToggleCompletedState());

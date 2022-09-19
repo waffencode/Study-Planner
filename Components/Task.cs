@@ -7,9 +7,6 @@ namespace Study_Planner.Components
 {
     public class Task : INotifyPropertyChanged
     {
-        private int _id;
-        public int Id { get => _id; set => _id = value; }
-
         private string _shortDescription;
         public string ShortDescription { get => _shortDescription; set { _shortDescription = value; NotifyPropertyChanged(); } }
 
@@ -27,11 +24,7 @@ namespace Study_Planner.Components
         }
 
         [JsonConstructor]
-        public Task(int id, string shortDescription)
-        {
-            Id = id;
-            ShortDescription = shortDescription;
-        }
+        public Task(string shortDescription) => ShortDescription = shortDescription;
 
         public void ToggleCompletedState() => IsCompleted = !IsCompleted;
 
