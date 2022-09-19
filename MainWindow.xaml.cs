@@ -10,7 +10,7 @@ namespace Study_Planner
         public MainWindow()
         {
             InitializeComponent();
-            MainViewModel = this.DataContext as TaskViewModel;
+            MainViewModel = DataContext as TaskViewModel;
             MainViewModel.OnProgramStartup();
         }
 
@@ -20,9 +20,6 @@ namespace Study_Planner
             Close();
         }
 
-        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     }
 }
