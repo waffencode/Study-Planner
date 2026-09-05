@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
-namespace Study_Planner.Components
+namespace StudyPlanner.Components
 {
     public class TaskViewModel
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 
-namespace Study_Planner.Components
+namespace StudyPlanner.Components
 {
     public static class FileManager
     {

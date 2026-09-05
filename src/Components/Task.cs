@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
-namespace Study_Planner.Components
+namespace StudyPlanner.Components
 {
     public class Task : INotifyPropertyChanged
     {

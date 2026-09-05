@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Study_Planner.Components
+namespace StudyPlanner.Components
 {
     public class Command : ICommand
     {

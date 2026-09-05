@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Study_Planner;
+namespace StudyPlanner;
 
 public partial class App : Application
 {

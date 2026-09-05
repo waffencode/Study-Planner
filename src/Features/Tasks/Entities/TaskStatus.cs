@@ -1,4 +1,4 @@
-﻿namespace Study_Planner.Features.Tasks.Entities;
+﻿namespace StudyPlanner.Features.Tasks.Entities;
 
 internal class TaskStatus
 {

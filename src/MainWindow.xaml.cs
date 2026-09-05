@@ -1,7 +1,7 @@
-﻿using Study_Planner.Components;
+﻿using StudyPlanner.Components;
 using System.Windows;
 
-namespace Study_Planner
+namespace StudyPlanner
 {
     public partial class MainWindow : Window
     {
