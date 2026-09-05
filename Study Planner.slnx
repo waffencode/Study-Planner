@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Elements/">
+    <File Path=".editorconfig" />
+    <File Path="AGENTS.md" />
+  </Folder>
+  <Project Path="src/Study Planner.csproj" />
+</Solution>

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Configuration;
 using System.Windows.Controls;
 
 namespace Study_Planner.Components
@@ -8,7 +7,7 @@ namespace Study_Planner.Components
     {
         public ObservableCollection<Task> Tasks { get; set; }
 
-        private readonly string tasksFilePath = ConfigurationManager.AppSettings.Get("tasksFileName");
+        private readonly string tasksFilePath = "SavedTasks.json";
 
         private Command _addTaskCommand;
         public Command AddTaskCommand => _addTaskCommand ??= new Command(obj => Tasks.Add(new Task(obj as string)));
