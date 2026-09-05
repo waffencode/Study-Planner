@@ -3,5 +3,6 @@
     <File Path=".editorconfig" />
     <File Path="AGENTS.md" />
   </Folder>
-  <Project Path="src/Study Planner.csproj" />
+  <Project Path="src/StudyPlanner.Domain/StudyPlanner.Domain.csproj" />
+  <Project Path="src/StudyPlanner.App/StudyPlanner.App.csproj" />
 </Solution>

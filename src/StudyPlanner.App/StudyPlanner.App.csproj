@@ -4,23 +4,29 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>StudyPlanner.App</RootNamespace>
+    <AssemblyName>StudyPlanner.App</AssemblyName>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>false</UseWindowsForms>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>$(MSBuildThisFileDirectory)..\bin\</BaseOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="9.3.2" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="11.0.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.158" />
     <PackageReference Include="NLog" Version="6.2.0" />
+    <PackageReference Include="VirtualizingWrapPanel" Version="2.5.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Tasks\ViewModels\" />
+    <ProjectReference Include="..\StudyPlanner.Domain\StudyPlanner.Domain.csproj" />
   </ItemGroup>
 
 </Project>
